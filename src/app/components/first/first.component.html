@@ -1,0 +1,35 @@
+<h1>Lista de Posts</h1>
+
+<!-- Tabla para mostrar la lista de posts -->
+<table>
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Contenido</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let object of objects">
+      <td>
+        <span *ngIf="!object.isEditing">{{ object.title }}</span>
+        <input *ngIf="object.isEditing" [(ngModel)]="object.title" />
+      </td>
+      <td>
+        <span *ngIf="!object.isEditing">{{ object.body }}</span>
+        <input *ngIf="object.isEditing" [(ngModel)]="object.body" />
+      </td>
+      <td>
+        <button *ngIf="!object.isEditing" (click)="editObject(object)">Editar</button>
+        <button *ngIf="object.isEditing" (click)="updateObject(object)">Guardar</button>
+        <button (click)="deleteObject(object.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Formulario para crear un nuevo post -->
+<h2>Crear Nuevo Post</h2>
+<input [(ngModel)]="objectToCreate.title" placeholder="Título" required />
+<input [(ngModel)]="objectToCreate.body" placeholder="Contenido" required />
+<button (click)="addObject()">Crear Nuevo Post</button>
